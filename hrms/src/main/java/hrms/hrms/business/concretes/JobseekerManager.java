@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hrms.hrms.business.abstracts.JobseekerService;
+import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.Result;
+import hrms.hrms.core.utilities.results.SuccessDataResult;
+import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.JobseekerDao;
 import hrms.hrms.entities.concretes.Jobseeker;
 
@@ -21,15 +25,15 @@ public class JobseekerManager implements JobseekerService{
 	}
 
 	@Override
-	public List<Jobseeker> getAll() {
+	public DataResult<List<Jobseeker>> getAll() {
 		
-		return this.jobseekerDao.findAll();
+		return new SuccessDataResult<List<Jobseeker>>(this.jobseekerDao.findAll(),"Data listelendi");
 	}
 
 	@Override
-	public void add(Jobseeker jobseeker) {
+	public Result add(Jobseeker jobseeker) {
 		this.jobseekerDao.save(jobseeker);
-		
+		return new SuccessResult();
 	}
 
 
