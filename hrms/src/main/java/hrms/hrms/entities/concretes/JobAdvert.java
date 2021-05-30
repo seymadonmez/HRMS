@@ -11,16 +11,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="jobs")
-public class Job {
+@Table(name="job_adverts")
+public class JobAdvert {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "description")
+	private String description;
 	
 	@Column(name = "employer_id")
 	private int employerId;
