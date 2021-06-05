@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import hrms.hrms.business.abstracts.UserService;
 import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.ErrorDataResult;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.dataAccess.abstracts.UserDao;
 import hrms.hrms.entities.concretes.User;
@@ -26,5 +27,15 @@ private UserDao userDao;
 	public DataResult<List<User>> getAll() {
 		
 		return new SuccessDataResult<List<User>>(this.userDao.findAll());
+	}
+
+	@Override
+	public DataResult<User> getByEmail(String email) {
+		
+		if(userDao.getByEmail(email)!=null)
+		{
+			return  new SuccessDataResult<User>("Kullanıcı bulundu");
+		}
+		return new ErrorDataResult<User>();
 	}
 }
