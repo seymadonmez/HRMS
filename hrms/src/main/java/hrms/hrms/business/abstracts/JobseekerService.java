@@ -9,5 +9,6 @@ import hrms.hrms.entities.concretes.Jobseeker;
 public interface JobseekerService {
 	DataResult<List<Jobseeker>> getAll();
 	Result add(Jobseeker jobseeker);
+	DataResult<Jobseeker> getByIdentificationNumber(String identificationNumber);
 	
 }

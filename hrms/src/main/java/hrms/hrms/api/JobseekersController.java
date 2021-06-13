@@ -10,31 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrms.hrms.business.abstracts.EmployerService;
+import hrms.hrms.business.abstracts.JobseekerService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.Employer;
+
+import hrms.hrms.entities.concretes.Jobseeker;
 
 @RestController
-@RequestMapping("/api/employers")
+@RequestMapping("/api/jobseekers")
 @CrossOrigin
-public class EmployersController {
-	
-	private EmployerService employerService;
-	
-	@Autowired
-	public EmployersController(EmployerService employerService) {
-		super();
-		this.employerService = employerService;
-	}
+public class JobseekersController {
 
-	@GetMapping("/getall")
-	public DataResult<List<Employer>> getAll(){
-		return this.employerService.getAll();
+	public JobseekerService jobseekerService;
+	@Autowired
+	public JobseekersController(JobseekerService jobseekerService) {
+		super();
+		this.jobseekerService = jobseekerService;
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Employer employer){
-		return this.employerService.add(employer);
+	public Result add(@RequestBody Jobseeker jobseeker){
+		return this.jobseekerService.add(jobseeker);
 	}
+	
+	@GetMapping("/getByIdentificationNumber")
+	public DataResult<Jobseeker> getByIdentificationNumber(String idendificationNumber){
+		return this.jobseekerService.getByIdentificationNumber(idendificationNumber);
+	}
+	
 }

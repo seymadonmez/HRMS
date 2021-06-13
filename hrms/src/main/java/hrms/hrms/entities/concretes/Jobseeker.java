@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.apache.tomcat.jni.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,10 +21,10 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name="jobseeker_id", referencedColumnName="user_id")
 public class Jobseeker extends User {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "jobseeker_id")
-	private int jobseekerId;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "jobseeker_id")
+//	private int jobseekerId;
 	
 	@Column(name = "first_name")
 	private String firstName;

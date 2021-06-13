@@ -18,6 +18,8 @@ public class EmployerManager implements EmployerService {
 
 	private EmployerDao employerDao;
 	
+	
+	
 	@Autowired
 	public EmployerManager(EmployerDao employerDao) {
 		super();

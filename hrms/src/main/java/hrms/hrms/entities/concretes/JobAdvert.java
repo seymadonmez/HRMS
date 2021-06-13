@@ -5,13 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name="job_adverts")
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobAdvert {
 	
 	@Id
@@ -22,11 +29,16 @@ public class JobAdvert {
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "employer_id")
-	private int employerId;
+//	@Column(name = "employer_id")
+//	private int employerId;
 	
-	@Column(name = "position_id")
-	private int positionId;
+	@ManyToOne()
+	@JoinColumn(name = "employer_id")
+	private Employer employer;
+	
+	@ManyToOne()
+	@JoinColumn(name = "position_id")
+	private Position position;
 	
 	@Column(name = "location")
 	private String location;

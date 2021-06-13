@@ -1,5 +1,6 @@
 package hrms.hrms.business.concretes;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hrms.hrms.business.abstracts.AuthService;
@@ -11,8 +12,8 @@ import hrms.hrms.core.utilities.business.BusinessRules;
 import hrms.hrms.core.utilities.results.ErrorResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessResult;
-import hrms.hrms.entities.concretes.Employer;
-import hrms.hrms.entities.concretes.Jobseeker;
+import hrms.hrms.entities.dtos.EmployerForRegisterDto;
+import hrms.hrms.entities.dtos.JobseekerForRegisterDto;
 
 
 @Service
@@ -22,6 +23,7 @@ public class AuthManager implements AuthService {
 	private MailService mailService;
 	private UserService userService;
 
+	@Autowired
 	public AuthManager(EmployerService employerService,JobseekerService jobseekerService,MailService mailService,UserService userService) {
 		super();
 		this.employerService = employerService;
@@ -31,14 +33,20 @@ public class AuthManager implements AuthService {
 	}
 
 	@Override
-	public Result employerRegister(Employer employer) {
+	public Result employerRegister(EmployerForRegisterDto employer) {
 		
-		//var result =BusinessRules.Run(checkEmailExists(employer.getEmail()));
-		return null;
+		var result =BusinessRules.Run(checkEmailExists(employer.getEmail()));
+		if (result != null) {
+			return result;
+		}
+		
+        //Employer createEmployer = modelMapper.map(employer,Employer.class);
+        //this.employerService.add(createEmployer);
+        return new SuccessResult();
 	}
 
 	@Override
-	public Result jobseekerRegister(Jobseeker jobseeker) {
+	public Result jobseekerRegister(JobseekerForRegisterDto jobseeker) {
 		// TODO Auto-generated method stub
 		return null;
 	}
