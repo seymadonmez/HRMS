@@ -56,7 +56,7 @@ public class JobseekerManager implements JobseekerService{
 	private Result checkIdentityNumberExists(String identificationNumber) {
 		
         if(this.jobseekerDao.findByIdentificationNumber(identificationNumber).equals(null)) {
-            return new ErrorResult("Tckn bulunamadı");
+        	return new ErrorResult();
         }
         
         return new SuccessResult();

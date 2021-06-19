@@ -1,12 +1,10 @@
 package hrms.hrms.entities.concretes;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -20,12 +18,10 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name = "id",referencedColumnName = "user_id")
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class HrmsPersonnel extends User {
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private int id;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
 	
@@ -36,7 +32,7 @@ public class HrmsPersonnel extends User {
 	private String identificationNumber;
 	
 	@Column(name = "insert_date")
-	private Date insertDate;
+	private LocalDate insertDate;
 	
 	@Column(name = "status")
 	private Boolean status;

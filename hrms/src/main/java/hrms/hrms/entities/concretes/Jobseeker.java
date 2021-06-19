@@ -2,9 +2,6 @@ package hrms.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -21,10 +18,6 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name="jobseeker_id", referencedColumnName="user_id")
 public class Jobseeker extends User {
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "jobseeker_id")
-//	private int jobseekerId;
 	
 	@Column(name = "first_name")
 	private String firstName;

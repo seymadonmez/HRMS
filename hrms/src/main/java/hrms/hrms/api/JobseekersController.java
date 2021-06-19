@@ -1,6 +1,5 @@
 package hrms.hrms.api;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,5 +36,7 @@ public class JobseekersController {
 	public DataResult<Jobseeker> getByIdentificationNumber(String idendificationNumber){
 		return this.jobseekerService.getByIdentificationNumber(idendificationNumber);
 	}
+	
+	
 	
 }
