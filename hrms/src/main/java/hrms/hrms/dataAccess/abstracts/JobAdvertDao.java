@@ -15,26 +15,36 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
     List<JobAdvert> findByStatusTrueOrderByInsertDate();
 
-    List<JobAdvert> findByStatusTrueAndEmployer_EmployerId(int employerId);
-
-    JobAdvert findByIdAndEmployer_EmployerId(int jobadvertId, int employerId);
         
 	List<JobAdvert> getByApplicationDeadlineLessThanEqual(LocalDate date);
 	List<JobAdvert> getByStatusTrueAndApplicationDeadlineLessThanEqual(LocalDate date);
 	List<JobAdvert> getByStatusTrueAndEmployer_CompanyName(String companyName);
-	List<JobAdvert> getByEmployer_EmployerId(int employerId);
+
 	
-	List<JobAdvert> getByPosition_PositionId(List<Integer> jobAdverts);
+	List<JobAdvert> getByPosition_PositionIdIn(List<Integer> jobAdverts);
 	
 	List<JobAdvert> getByDescriptionStartsWith(String description);
 	
-	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) From JobAdvert j Inner Join j.employer e Inner Join j.position p where j.status = 'true'")
-	List<JobAdvertDetailDto> getJobAdvertDetails();
+	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto"
+			+ "(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) "
+			+ "From JobAdvert j Inner Join j.employer e Inner Join j.position p "
+			+ "Where j.status = true")
+	List<JobAdvertDetailDto> getActiveJobAdvertDetails();
 	
-	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) From JobAdvert j Inner Join j.employer e Inner Join j.position p where j.status = true j.id = :id")
+	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto"
+			+ "(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) "
+			+ "From JobAdvert j Inner Join j.employer e Inner Join j.position p "
+			+ "Where j.status = true and j.id = :id")
 	List<JobAdvertDetailDto> getJobAdvertDetailsById(int id);
 	
-	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) From JobAdvert j Inner Join j.employer e Inner Join j.position p where j.status = true e.employer_id = :employerId")
+	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto"
+			+ "(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) "
+			+ "From JobAdvert j Inner Join j.employer e Inner Join j.position p "
+			+ "where j.status = true and e.employer_id = :employerId ")
 	List<JobAdvertDetailDto> getJobAdvertDetailsByEmployerId(int employerId);
+	
+//	@Modifying
+//	@Query("update JobAdvert set status=false Where id = :jobAdvertisementId")
+//	void closeTheAdvertisement(@Param("jobAdvertisementId") int jobAdvertisementId); 
 	
 }

@@ -70,7 +70,7 @@ public class JobAdvert {
     @JoinColumn(name = "city_id")
     private City city;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
 	@Column(name = "insert_date")

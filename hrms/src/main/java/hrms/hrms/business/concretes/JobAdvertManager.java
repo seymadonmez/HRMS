@@ -41,13 +41,15 @@ public class JobAdvertManager implements JobAdvertService {
 	@Override
 	public DataResult<List<JobAdvertDetailDto>> getJobAdvertDetails() {
 		
-		return new SuccessDataResult<List<JobAdvertDetailDto>>(this.jobAdverdao.getJobAdvertDetails());
+		return null;
+		//return new SuccessDataResult<List<JobAdvertDetailDto>>(this.jobAdverdao.getJobAdvertDetails());
 	}
 
 	@Override
 	public DataResult<List<JobAdvertDetailDto>> getJobAdvertDetailsByEmployerId(int employerId) {
 		
-		return new SuccessDataResult<List<JobAdvertDetailDto>>(this.jobAdverdao.getJobAdvertDetailsByEmployerId(employerId));
+		return null;
+		//return new SuccessDataResult<List<JobAdvertDetailDto>>(this.jobAdverdao.getJobAdvertDetailsByEmployerId(employerId));
 	}
 	
 	@Override
