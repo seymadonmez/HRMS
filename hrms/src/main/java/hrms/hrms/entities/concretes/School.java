@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,23 +18,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name="cities")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobAdvertisements"})
-public class City {
-	
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "city_id")
-		private int id;
+@Table(name = "schools")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler", "educationInformations"})
+@Entity
+public class School {
 
-	    @Column(name = "name")
-	    private String name;
-   
-	    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-	    @JsonIgnore()
-	    private List<JobAdvert> jobAdverts;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
+	@Column(name = "school_name")
+	private String schoolName;
+
+	@OneToMany(mappedBy = "school")
+	@JsonIgnore()
+	private List<EducationInformation> educationInformations;
 }

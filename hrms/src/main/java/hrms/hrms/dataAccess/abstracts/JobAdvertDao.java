@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import hrms.hrms.entities.concretes.JobAdvert;
 import hrms.hrms.entities.dtos.JobAdvertDetailDto;
@@ -40,11 +42,21 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto"
 			+ "(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) "
 			+ "From JobAdvert j Inner Join j.employer e Inner Join j.position p "
-			+ "where j.status = true and e.employer_id = :employerId ")
+			+ "where j.status = true and e.userId = :employerId ")
 	List<JobAdvertDetailDto> getJobAdvertDetailsByEmployerId(int employerId);
 	
-//	@Modifying
-//	@Query("update JobAdvert set status=false Where id = :jobAdvertisementId")
-//	void closeTheAdvertisement(@Param("jobAdvertisementId") int jobAdvertisementId); 
+	@Query("Select new hrms.hrms.entities.dtos.JobAdvertDetailDto"
+			+ "(j.id, e.companyName, p.name, j.openPositionCount, j.insertDate, j.applicationDeadline, j.status) "
+			+ "From JobAdvert j Inner Join j.employer e Inner Join j.position p "
+			+ "where j.status = true and e.companyName = :companyName ")
+	List<JobAdvertDetailDto> getActiveJobAdsByCompanyName(String companyName);
+	
+	@Modifying
+	@Query("Update JobAdvert set status=false Where id = :jobAdvertisementId")
+	void closeTheAdvertisement(@Param("jobAdvertisementId") int jobAdvertisementId); 
+	
+	@Modifying
+	@Query("Update JobAdvert set status=true Where id = :jobAdvertisementId")
+	void openTheAdvertisement(@Param("jobAdvertisementId") int jobAdvertisementId); 
 	
 }

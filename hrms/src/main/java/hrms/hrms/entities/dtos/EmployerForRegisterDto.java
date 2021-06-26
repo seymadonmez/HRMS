@@ -14,5 +14,5 @@ public class EmployerForRegisterDto {
 	private String email;
 	private String password;
 	private boolean status;
-	private String rePassword;
+
 }
