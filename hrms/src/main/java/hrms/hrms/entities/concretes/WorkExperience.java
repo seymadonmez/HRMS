@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.lang.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +51,7 @@ public class WorkExperience {
 	@Column(name = "beginning_date")
 	private LocalDate beginningDate;
 
+	@Nullable
 	@Column(name = "finish_date")
 	private LocalDate finishDate;
 }

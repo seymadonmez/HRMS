@@ -1,10 +1,14 @@
 package hrms.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +35,8 @@ public class Jobseeker extends User {
 	@Column(name = "year_of_birth")
 	private int yearOfBirth;
 
-	
+	@OneToMany(mappedBy = "jobseeker")
+	@JsonIgnore
+	private List<CurriculumVitae> curriculumVitaes;
 
 }

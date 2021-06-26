@@ -37,4 +37,9 @@ public class WorkExperiencesController {
 	public DataResult<List<WorkExperience>> getAll(){
 		return this.workExperienceService.getAll();
 	}
+	
+	@GetMapping("/getWorkExperiencesByJobseekerId")
+	public DataResult<List<WorkExperience>> getWorkExperiencesByJobseekerId(int jobseekerId){
+		return this.workExperienceService.getWorkExperiencesByJobseekerId(jobseekerId);
+	}
 }
